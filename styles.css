@@ -51,7 +51,6 @@ h1 {
 .input-pane > input {
   flex: 1 1 8em;
   font-size: 30;
-  font-family: "微软雅黑";
 }
 
 .list-pane > .todo-item {
