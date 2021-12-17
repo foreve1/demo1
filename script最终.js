@@ -15,7 +15,7 @@ function renderTodoItemList(todoItems, finishedItems) {
         // 创建新的div，并起名class为todo-item
         let itemDiv = document.createElement("div");
         itemDiv.className = "todo-item";
-
+        // 功能一：标记已完成事项
         // 创建新的input框，并设置类型为checkbox
         let inputEl = document.createElement("input");
         inputEl.type = "checkbox";
@@ -31,9 +31,16 @@ function renderTodoItemList(todoItems, finishedItems) {
             }, 500);
             console.log("finshed:", i, todoItems, finishedItems);
         });
+        // 功能二：修改待办项
         // 创建新的div，并起名class为title
         let titleEl = document.createElement("div");
         titleEl.className = "title";
+        titleEl.contentEditable = "true"
+        titleEl.addEventListener("input", (e) => {
+            todoItems[i].title = titleEl.innerText
+            console.log(todoItems)
+        })
+        // 功能三：标记重要性
         // 创建新的div，并起名class为important-flag，并添加text的！
         let importanceEl = document.createElement("div");
         importanceEl.className = "important-flag";
@@ -55,6 +62,7 @@ function renderTodoItemList(todoItems, finishedItems) {
             // 重新初始化任务框
             renderTodoItemList(todoItems, finishedItems);
         });
+        // 功能四：删除待办项
         // 创建button按钮，值为X
         let deleteBtn = document.createElement("button");
         deleteBtn.innerText = "X";
@@ -108,7 +116,7 @@ function renderFinishedItemList(todoItems, finishedItems) {
         paneEl.append(itemDiv);
     }
 }
-
+// 功能五：添加待办事项
 function renderInputPane(todoItems) {
     let inputPaneEl = document.querySelector("#todolist > .input-pane");
     // 获取add-btn的dom元素
@@ -120,16 +128,23 @@ function renderInputPane(todoItems) {
         //   获取input框的值
         let inputEl = inputPaneEl.querySelector("input");
         // 把input框的值添加到todoItems数组中
-        todoItems.push({
-            title: inputEl.value, // 值
-            isFinished: false, // 是否完成
-            isImportance: false, // 是不是重点任务
-        });
+        if (inputEl.value === "") {
+            alert("请输入待办事项")
+        } else {
+            todoItems.push({
+                title: inputEl.value, // 值
+                isFinished: false, // 是否完成
+                isImportance: false, // 是不是重点任务
+            });
+
+        }
+
         // 控制台输出添加的是任务是什么
         console.log("add a item: ", inputEl.value);
         // 重新初始化任务框
         renderTodoItemList(todoItems, finishedItems);
     });
+    // 功能六：列出已完成待办事项
     // 点击his-btn元素 执行的函数
     hisBtnEl.addEventListener("click", (e) => {
         //   判断his-btn按钮的class列表是不是有一个open的值
@@ -152,3 +167,8 @@ function renderInputPane(todoItems) {
 // 执行函数
 renderInputPane(todoItems, finishedItems);
 renderTodoItemList(todoItems, finishedItems);
+
+
+
+
+
