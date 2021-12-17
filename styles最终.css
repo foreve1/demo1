@@ -13,6 +13,7 @@ div.todo-item:hover{
 	color:wheat;
 	background: black;
 }
+
 @keyframes move{
   0% {
      background-position: 0 0;
@@ -64,7 +65,9 @@ h1 {
 
 .list-pane > .todo-item > .title {
   flex: 1 1 8em;
+  font-size: 20;
 }
+
 /* 设置重要标志 */
 .important-flag {
   width: 1.5em;
